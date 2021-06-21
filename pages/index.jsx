@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-import ImageContainer from '../components/ImageContainer'
+import Container from '../components/Container'
 export default function Home() {
 
   const images = [
@@ -28,11 +28,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main} style={{ "--total-image": total }}>
-      <h1 style={{"color": "#ffffff", "text-align": "center"}}>FALOPA</h1>
       {images.map((image, index) => (
-      <ImageContainer
+      <Container
         key={image}
-        keyImage={index}
+        index={index}
         imageURL={image}
         />
       ))}

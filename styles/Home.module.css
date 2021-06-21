@@ -9,10 +9,10 @@
 
 @keyframes animate {
   0%{
-      transform: perspective(1000px) rotateX(0deg) rotateZ(15deg);
+      transform: perspective(2000px) rotateX(0deg) rotateZ(15deg);
   }
   100%{
-      transform: perspective(1000px) rotateX(360deg) rotateZ(15deg);
+      transform: perspective(2000px) rotateX(360deg) rotateZ(15deg);
   }
 }
 
@@ -25,7 +25,7 @@
   transform-origin: center;
   transform-style: preserve-3d;
   --rotate-element:calc(360deg / var(--total-image));
-  --distance-element: calc(35px * var(--total-image));
+  --distance-element: calc(var(--height) + var(--width));
   transform: rotateX(calc(var(--i) * var(--rotate-element))) translateZ(var(--distance-element));
 }
 
