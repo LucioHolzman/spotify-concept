@@ -105,3 +105,13 @@
   transform: translateZ(1px) translateY(100%);
   overflow: hidden;
 }
+
+.containerDimensions {
+  position: absolute;
+  width: 200px;
+  padding: 15px;
+}
+
+.containerInput {
+  margin-bottom: 20px;
+}
