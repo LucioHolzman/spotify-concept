@@ -36,8 +36,7 @@ export default function Home() {
         <div className={styles.container}>
           <div className={styles.main} style={{ "--total": total, "--width-general": width, "--height-general" : height }}>
           <div className={styles.textContent}>
-            <h2>Galeria 3D</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia, id totam suscipit, dolore inventore, numquam ducimus illo aperiam ipsa beatae nam quo aliquid similique ipsam corrupti doloremque sequi. Atque, voluptas?</p>
+            <h2>Lucio Holzman</h2>
           </div>
             {images.map((image, index) => (
               <Container 
