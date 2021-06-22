@@ -10,14 +10,12 @@ export default function Home() {
     "https://cdn.wallpapersafari.com/81/28/wiSPx7.jpg",
     "https://i.pinimg.com/originals/77/88/83/778883672347335c7685dc3bad7f3cac.jpg",
     "https://wallpapermemory.com/uploads/692/cool-space-background-hd-1600x900-398742.jpg",
-    "https://www.wallpaperkiss.com/wimg/b/103-1035485_big.jpg",
     "https://images.hdqwalls.com/download/galaxy-space-fantasy-science-fiction-ci-1920x1200.jpg",
     "https://s1.1zoom.me/b5050/876/373381-sepik_1366x768.jpg",
     "https://wallpaperaccess.com/full/495972.jpg",
     // -------------------------------------------
     "https://i.pinimg.com/originals/77/88/83/778883672347335c7685dc3bad7f3cac.jpg",
     "https://wallpapermemory.com/uploads/692/cool-space-background-hd-1600x900-398742.jpg",
-    "https://www.wallpaperkiss.com/wimg/b/103-1035485_big.jpg",
     "https://images.hdqwalls.com/download/galaxy-space-fantasy-science-fiction-ci-1920x1200.jpg",
     "https://s1.1zoom.me/b5050/876/373381-sepik_1366x768.jpg",
     "https://wallpaperaccess.com/full/495972.jpg",
@@ -42,7 +40,13 @@ export default function Home() {
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia, id totam suscipit, dolore inventore, numquam ducimus illo aperiam ipsa beatae nam quo aliquid similique ipsam corrupti doloremque sequi. Atque, voluptas?</p>
           </div>
             {images.map((image, index) => (
-              <Container key={image} index={index} imageURL={image}/>
+              <Container 
+              key={image} 
+              index={index} 
+              imageURL={image}
+              widthGeneral="250px"
+              heightGeneral="150px"
+              />
             ))}
           </div>
         </div>
