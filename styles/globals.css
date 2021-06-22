@@ -1,14 +1,8 @@
-:root {
-  --width:200px;
-  --height:150px;
-}
+
 html,
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background: #000;
+  background: #222;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
