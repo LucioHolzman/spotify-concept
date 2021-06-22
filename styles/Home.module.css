@@ -108,6 +108,7 @@
 
 .containerDimensions {
   position: absolute;
+  z-index: 99999999;
   width: 200px;
   padding: 15px;
 }
