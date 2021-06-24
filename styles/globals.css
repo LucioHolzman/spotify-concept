@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 
 html,
 body {
@@ -14,20 +17,3 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-label {
-  color: white;
-}
-
-input {
-  outline: none;
-  width: 100%;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid white;
-  padding: 5px;
-  color: white;
-}
