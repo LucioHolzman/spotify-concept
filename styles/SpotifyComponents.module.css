@@ -1,0 +1,58 @@
+.ulSpotifyCategories::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, .1);
+    border-radius: 4px;
+}
+
+.ulSpotifyCategories::-webkit-scrollbar-thumb {
+background: rgba(0, 0, 0, 0.3);
+border-radius: 4px;
+}
+
+.ulSpotifyCategories::-webkit-scrollbar {
+width: 6px;  
+height: 6px;     
+}
+
+.ulSpotifyCategories {
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
+    overflow-x: scroll;
+}
+
+.liSpotifyCategories {
+    padding: 10px;
+}
+
+.aSpotifyCategories {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imgSpotifyCategories {
+    
+    height: 60px;
+    width: auto;
+}
+
+.ulSpotifyPlayList {
+}
+
+.liSpotifyPlayList {
+    padding: 10px;
+}
+
+.aSpotifyPlayList {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.imgSpotifyPlayList {
+    margin-right: 15px;
+    height: 60px;
+    width: auto;
+}

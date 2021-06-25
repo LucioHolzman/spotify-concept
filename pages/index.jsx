@@ -2,9 +2,11 @@ import { useState, useEffect, useCallback, useMemo, useContext } from "react";
 import { contextApp } from "../context";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import SpotifyCategories from "../components/SpotifyCategories";
-import SpotifyPlayList from "../components/SpotifyPlayList";
+import stylesSpotify from "../styles/SpotifyComponents.module.css";
+import { SpotifyCategoriesList, SpotifyCategorySelected } from "../components/SpotifyCategories";
+import { SpotifyPlayLists, SpotifyPlayListSelected } from "../components/SpotifyPlayList";
 import SpotifyTrack from "../components/SpotifyTrack";
+import SpotifySearch from "../components/SpotifySearch";
 import Spinner from "../components/Spinner";
 import { storage } from "../firebase";
 
@@ -73,10 +75,10 @@ export default function Home() {
   const total = useMemo(() => tracks.length, [tracks]);
 
   //------------Width---------------
-  const [width, setWidth] = useState(400);
+  const [width, setWidth] = useState(300);
 
   //------------Height--------------
-  const [height, setHeight] = useState(200);
+  const [height, setHeight] = useState(250);
 
   return (
     <div>
@@ -87,21 +89,6 @@ export default function Home() {
       </Head>
       <div className={styles.position}>
         <div className={styles.containerDimensions}>
-          <div className={styles.dropZone}>
-            <progress
-              className={styles.progress}
-              value={progress}
-              max="100"
-            ></progress>
-            <input
-              className={styles.inputFile}
-              type="file"
-              onChange={handleChangeImage}
-            />
-            <div className={styles.containerButton}>
-              <button onClick={handleUpload}>Upload</button>
-            </div>
-          </div>
           <div className={styles.containerInput}>
             <label className={styles.label} htmlFor="">
               Width
@@ -123,8 +110,9 @@ export default function Home() {
               value={height}
               onChange={(e) => setHeight(e.target.value)}
             />
-            <SpotifyCategories />
-            <SpotifyPlayList />
+            <SpotifySearch/>
+            <SpotifyCategoriesList />
+            <SpotifyPlayLists />
           </div>
         </div>
         { tracks.length === 0 ? (
@@ -139,12 +127,11 @@ export default function Home() {
                 "--height-general": `${height}px`,
               }}
             >
-              <div className={styles.textContent}>
-                <h2>Lucio Holzman</h2>
+              <div className={styles.categoryAndListSelected}>
+              <SpotifyCategorySelected/>
+              <SpotifyPlayListSelected/>
               </div>
-              
             <SpotifyTrack/>
-
             </div>
           </div>
         )}

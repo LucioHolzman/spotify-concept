@@ -4,13 +4,14 @@ import styles from '../../styles/Home.module.css'
 
 const SpotifyTrack = () => {
 
-const { tracks } = useContext(contextApp)
+const { tracks, search } = useContext(contextApp)
   console.log(tracks.length);
+  console.log(search);
     return(
         <>
         { tracks.length !== 0 ?
         tracks.map((elem, index) => (
-          <span key={elem.track.id} style={{"--i": index}} className={styles.card}>
+          <span key={ elem.track.id } style={{"--i": index}} className={styles.card}>
           <iframe
                 src={`https://open.spotify.com/embed/track/${elem.track.id}`}
                 width="100%"
@@ -19,7 +20,7 @@ const { tracks } = useContext(contextApp)
                 allowtransparency="true"
                 allow="encrypted-media"
                 ></iframe>
-                </span>
+            </span>
         )): <p>Loading..</p>
       }
         </>

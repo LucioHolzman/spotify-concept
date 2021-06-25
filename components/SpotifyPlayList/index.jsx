@@ -1,18 +1,20 @@
 import { useContext, useEffect } from "react";
 import { contextApp } from "../../context";
 
-const SpotifyPlayList = () => {
+import styles from "../../styles/SpotifyComponents.module.css"
+
+export const SpotifyPlayLists = () => {
   const { playList, setPlayListToken } = useContext(contextApp);
 
   return (
     <>
-      <ul>
+      <ul className={styles.ulSpotifyPlayList}>
         {playList.length !== 0 ? (
           playList.map((elem, index) => (
-            <li key={elem.id}>
-              <a href="#" onClick={() => setPlayListToken(index)}>
-                <h2>{elem.name}</h2>
-                <img src={elem.images[0].url} alt="" />
+            <li className={styles.liSpotifyPlayList} key={elem.id}>
+              <a className={styles.aSpotifyPlayList} href="#" onClick={() => setPlayListToken(index)}>
+                <img className={styles.imgSpotifyPlayList} src={elem.images[0].url} alt="" />
+                <p>{elem.name.charAt(0).toUpperCase() + elem.name.slice(1)}</p>
               </a>
             </li>
           ))
@@ -24,4 +26,21 @@ const SpotifyPlayList = () => {
   );
 };
 
-export default SpotifyPlayList;
+export const SpotifyPlayListSelected = () => {
+  const { playList, playListToken } = useContext(contextApp);
+console.log(playList, playListToken);
+  return (
+    <>
+    
+      <ul className={styles.ulSpotifyPlayList}>
+            <li className={styles.liSpotifyPlayList} key={playList[playListToken].id}>
+              <a  href="#" classname={styles.aSpotifyCategories} >
+                  <h4>Playlist</h4>
+                <img className={styles.imgSpotifyPlayList} src={playList[playListToken].images[0].url} alt="" />
+                <p>{playList[playListToken].name.charAt(0).toUpperCase() + playList[playListToken].name.slice(1)}</p>
+              </a>
+            </li>
+      </ul>
+    </>
+  );
+};

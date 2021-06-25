@@ -77,10 +77,10 @@ export const fetchSpotifyTracks = (tracksId, token) => {
   }
 };
 
-export const fetchUserProfile = (userId, token) => {
+export const fetchSpotifySearch = (search, token) => {
   try {
     return axios(
-      `https://api.spotify.com/v1/users/${userId}`,
+      `https://api.spotify.com/v1/search?q=${search}&type=track`,
       {
         method: "GET",
         headers: { Authorization: "Bearer " + token },
