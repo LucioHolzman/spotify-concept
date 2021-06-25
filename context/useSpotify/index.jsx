@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
 import {
   fetchSpotifyAuth,
   fetchSpotifyMe,
+  fetchUserProfile,
   fetchSpotifyCategories,
   fetchSpotifyPlayList,
   fetchSpotifyTracks,
@@ -12,8 +12,14 @@ const useSpotify = () => {
   const [token, setToken] = useState("");
   const [userId, setUserId] = useState(process.env.NEXT_PUBLIC_SPOTIFY_USER_ID);
   const [tracks, setTracks] = useState([]);
+
+
   const [categories, setCategories] = useState([]);
+  const [categoryToken, setCategoryToken] = useState(1);
+
   const [playList, setPlayList] = useState([]);
+  const [playListToken, setPlayListToken] = useState(1);
+
   const [user, setUser] = useState({
     name: "",
     profileImg: "",
@@ -23,7 +29,6 @@ const useSpotify = () => {
   const auth = useCallback(async () => {
     try {
       const tokenResponse = await fetchSpotifyAuth();
-      console.log(tokenResponse);
       setToken(tokenResponse.data.access_token);
     } catch (error) {
       console.log(error.response);
@@ -33,7 +38,6 @@ const useSpotify = () => {
   const spotifyMe = useCallback(async () => {
     try {
       const meRes = await fetchSpotifyMe(userId, token);
-      console.log(meRes);
       const name = meRes.data.display_name;
       const profileImg = meRes.data.images;
       const followers = meRes.data.followers.total;
@@ -41,37 +45,52 @@ const useSpotify = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [fetchSpotifyMe]);
+  }, [token, fetchSpotifyMe]);
+
+  const UserProfile = useCallback(async () => {
+    try {
+      const userRes = await fetchUserProfile(userId, token);
+      console.log(userRes);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [token, userId, fetchUserProfile]);
 
   const spotifyCategories = useCallback(async () => {
     try {
       const categoriesRes = await fetchSpotifyCategories(token);
-      console.log(categoriesRes.data.categories.items);
-      setCategories(categoriesRes.data.categories.items);
+      const categoriesRe = (categoriesRes.data.categories.items);
+      setCategories(categoriesRe);
     } catch (error) {
       console.log(error);
     }
   }, [token, fetchSpotifyCategories]);
 
+
+
   const spotifyPlayList = useCallback(async () => {
     try {
-      const playlistRes = await fetchSpotifyPlayList(categories[17].id, token);
-      console.log(playlistRes.data.playlists.items);
-      setPlayList(playlistRes.data.playlists.items);
+      const playlistRes = await fetchSpotifyPlayList(categories[categoryToken].id, token);
+      console.log(playlistRes);
+      const playlistRe = playlistRes.data.playlists.items
+      setPlayList(playlistRe);
     } catch (error) {
       console.log(error);
     }
-  }, [token, fetchSpotifyPlayList, categories]);
+  }, [token, fetchSpotifyPlayList, categories, categoryToken]);
+
+
 
   const spotifyTracks = useCallback(async () => {
     try {
-      const tracksRes = await fetchSpotifyTracks(playList[1].id, token);
+      const tracksRes = await fetchSpotifyTracks(playList[playListToken].id, token);
+      console.log(tracksRes);
       const tracksRe = tracksRes.data.tracks.items;
-      setTracks(tracksRe);
+      setTracks(tracksRe.slice(0,10));
     } catch (error) {
       console.log(error);
     }
-  }, [token, fetchSpotifyTracks, playList]);
+  }, [token, fetchSpotifyTracks, playList, playListToken]);
 
   useEffect(() => {
     auth();
@@ -87,14 +106,14 @@ const useSpotify = () => {
     if (categories.length) {
       spotifyPlayList();
     }
-  }, [categories]);
+  }, [categories, categoryToken]);
 
   useEffect(() => {
     if (playList.length) {
       spotifyTracks();
     }
-  }, [playList]);
+  }, [playList, playListToken]);
 
-  return tracks, user, categories;
+  return {tracks, user, playList, categories, setCategoryToken, setPlayListToken};
 };
 export default useSpotify;

@@ -1,8 +1,11 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useContext } from "react";
+import { contextApp } from "../context";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Container from "../components/Container";
-
+import SpotifyCategories from "../components/SpotifyCategories";
+import SpotifyPlayList from "../components/SpotifyPlayList";
+import SpotifyTrack from "../components/SpotifyTrack";
+import Spinner from "../components/Spinner";
 import { storage } from "../firebase";
 
 export default function Home() {
@@ -64,9 +67,10 @@ export default function Home() {
   useEffect(() => {
     fetchAllImages();
   }, []);
-
+  
+  const { tracks } = useContext(contextApp)
   //------------Total---------------
-  const total = useMemo(() => images.length, [images]);
+  const total = useMemo(() => tracks.length, [tracks]);
 
   //------------Width---------------
   const [width, setWidth] = useState(400);
@@ -119,10 +123,12 @@ export default function Home() {
               value={height}
               onChange={(e) => setHeight(e.target.value)}
             />
+            <SpotifyCategories />
+            <SpotifyPlayList />
           </div>
         </div>
-        {images.length === 0 ? (
-          <div className={styles.spinner}></div>
+        { tracks.length === 0 ? (
+          <Spinner />
         ) : (
           <div className={styles.container}>
             <div
@@ -136,15 +142,9 @@ export default function Home() {
               <div className={styles.textContent}>
                 <h2>Lucio Holzman</h2>
               </div>
-              {images.map((image, index) => (
-                <Container
-                  key={index}
-                  index={index}
-                  imageURL={image}
-                  widthGeneral="250px"
-                  heightGeneral="150px"
-                />
-              ))}
+              
+            <SpotifyTrack/>
+
             </div>
           </div>
         )}

@@ -66,7 +66,21 @@ export const fetchSpotifyPlayList = (categoryId, token) => {
 export const fetchSpotifyTracks = (tracksId, token) => {
   try {
     return axios(
-      `https://api.spotify.com/v1/playlists/${tracksId}`,
+      `https://api.spotify.com/v1/playlists/${tracksId}?limit=10`,
+      {
+        method: "GET",
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchUserProfile = (userId, token) => {
+  try {
+    return axios(
+      `https://api.spotify.com/v1/users/${userId}`,
       {
         method: "GET",
         headers: { Authorization: "Bearer " + token },
