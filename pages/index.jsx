@@ -75,7 +75,7 @@ export default function Home() {
   const total = useMemo(() => tracks.length, [tracks]);
 
   //------------Width---------------
-  const [width, setWidth] = useState(300);
+  const [width, setWidth] = useState(400);
 
   //------------Height--------------
   const [height, setHeight] = useState(250);
@@ -114,10 +114,21 @@ export default function Home() {
             <SpotifyCategoriesList />
             <SpotifyPlayLists />
           </div>
+
         </div>
         { tracks.length === 0 ? (
           <Spinner />
         ) : (
+          <>
+          <div className={styles.categoryAndListSelected}>
+            <div className={styles.categoryAndListSelectedElem}>
+          <SpotifyCategorySelected/>
+            </div>
+            <div className={styles.categoryAndListSelectedElem}>
+          <SpotifyPlayListSelected/>
+            </div>
+
+          </div>
           <div className={styles.container}>
             <div
               className={styles.main}
@@ -127,13 +138,11 @@ export default function Home() {
                 "--height-general": `${height}px`,
               }}
             >
-              <div className={styles.categoryAndListSelected}>
-              <SpotifyCategorySelected/>
-              <SpotifyPlayListSelected/>
-              </div>
+              
             <SpotifyTrack/>
             </div>
           </div>
+          </>
         )}
       </div>
     </div>

@@ -4,7 +4,7 @@ import useSpotify  from './useSpotify'
 export const contextApp = createContext(null)
 
 export const ContextProvider = ({ children }) => {
-    const {tracks, user, categories, playList, setCategoryToken, categoryToken, setPlayListToken, playListToken, setSearch, search} = useSpotify()
+    const {tracks, user, categories, playList, setCategoryToken, categoryToken, setPlayListToken, playListToken, setSearchToken, searchToken, search} = useSpotify()
 
     const context = {
         tracks,
@@ -14,9 +14,10 @@ export const ContextProvider = ({ children }) => {
         setCategoryToken,
         categoryToken,
         setPlayListToken,
-        setSearch,
-        search,
+        setSearchToken,
+        searchToken,
         playListToken,
+        search,
     }
     
     return (

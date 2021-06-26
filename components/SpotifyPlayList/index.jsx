@@ -28,16 +28,15 @@ export const SpotifyPlayLists = () => {
 
 export const SpotifyPlayListSelected = () => {
   const { playList, playListToken } = useContext(contextApp);
-console.log(playList, playListToken);
   return (
     <>
     
       <ul className={styles.ulSpotifyPlayList}>
             <li className={styles.liSpotifyPlayList} key={playList[playListToken].id}>
-              <a  href="#" classname={styles.aSpotifyCategories} >
+              <a  href="#" className={styles.contentSpotifyPlayListSelected} >
                   <h4>Playlist</h4>
-                <img className={styles.imgSpotifyPlayList} src={playList[playListToken].images[0].url} alt="" />
-                <p>{playList[playListToken].name.charAt(0).toUpperCase() + playList[playListToken].name.slice(1)}</p>
+                  <img className={styles.imgSpotifyPlayListSelected} src={playList[playListToken].images[0].url} alt="" />
+                  <p>{playList[playListToken].name.charAt(0).toUpperCase() + playList[playListToken].name.slice(1)}</p>
               </a>
             </li>
       </ul>

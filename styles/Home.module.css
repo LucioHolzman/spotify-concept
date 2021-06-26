@@ -15,10 +15,9 @@
   transition: width 1s ease;
   transform-style: preserve-3d;
   border-radius: 3px;
-  --time: calc(var(--total) * 2.5s);
+  --time: calc(var(--total) * 4.5s);
   --perspective: calc(var(--total) * 200px);
   animation: animate var(--time) linear infinite forwards;
-  transform: rotateX(90deg);
 }
 
 @media screen and (max-width: 500px) {
@@ -28,20 +27,16 @@
 }
 
 .categoryAndListSelected {
+  position: absolute;
+  right: 5%;
   display: flex;
-  justify-content: center;
   color: white;
+  height: 100%;
   width: var(--width);
-  animation: animateText var(--time) linear infinite;
 }
 
-@keyframes animateText {
-  0% {
-    transform: perspective(var(--perspective)) rotateX(360deg);
-  }
-  100% {
-    transform: perspective(var(--perspective)) rotateX(0deg);
-  }
+.categoryAndListSelectedElem {
+  padding: 20px;
 }
 
 @keyframes animateMobile {
@@ -55,10 +50,10 @@
 
 @keyframes animate {
   0% {
-    transform: perspective(var(--perspective)) rotateX(0deg) rotateZ(25deg);
+    transform: rotateY(-10deg) perspective(var(--perspective)) rotateX(0deg);
   }
   100% {
-    transform: perspective(var(--perspective)) rotateX(360deg) rotateZ(25deg);
+    transform: rotateY(-10deg) perspective(var(--perspective)) rotateX(360deg);
   }
 }
 
@@ -73,7 +68,7 @@
   transform-origin: center;
   transform-style: preserve-3d;
   --rotate-element: calc(360deg / (var(--total)));
-  --distance-element: calc((var(--height) * ((var(--total)) / 6)));
+  --distance-element: calc((var(--height) * ((var(--total)) / 6.28)));
   transition: transform 1s ease;
   transform: rotateX(calc(var(--i) * var(--rotate-element))) translateZ(var(--distance-element));
 }
@@ -94,10 +89,6 @@
   animation-play-state: paused;
 }
 
-.main:hover > .textContent {
-  transition: animation 1s ease;
-  animation-play-state: paused;
-}
 
 .h1 {
   position: absolute;

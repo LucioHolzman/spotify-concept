@@ -38,9 +38,6 @@ height: 6px;
     width: auto;
 }
 
-.ulSpotifyPlayList {
-}
-
 .liSpotifyPlayList {
     padding: 10px;
 }
@@ -55,4 +52,18 @@ height: 6px;
     margin-right: 15px;
     height: 60px;
     width: auto;
+}
+
+.contentSpotifyPlayListSelected {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgSpotifyPlayListSelected {
+    height: 60px;
+    width: auto;
+    margin: 0;
 }
