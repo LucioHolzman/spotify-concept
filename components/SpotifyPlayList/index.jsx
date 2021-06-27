@@ -31,7 +31,6 @@ export const SpotifyPlayListSelected = () => {
   return (
     <>
     
-      <ul className={styles.ulSpotifyPlayList}>
             <li className={styles.liSpotifyPlayList} key={playList[playListToken].id}>
               <a  href="#" className={styles.contentSpotifyPlayListSelected} >
                   <h4>Playlist</h4>
@@ -39,7 +38,6 @@ export const SpotifyPlayListSelected = () => {
                   <p>{playList[playListToken].name.charAt(0).toUpperCase() + playList[playListToken].name.slice(1)}</p>
               </a>
             </li>
-      </ul>
     </>
   );
 };

@@ -6,11 +6,11 @@ const SpotifySearch = () => {
 
 const { searchToken, setSearchToken } = useContext(contextApp)
 
-
+    console.log(searchToken);
     return(
         <>
         <div className="">
-            <input type="text" placeholder="Search" onChange={(e) => setSearchToken(e.target.value)}/>
+            <input type="text" className={styles.inputSpotifySearch} placeholder="Search" onChange={(e) => setSearchToken(e.target.value)}/>
         </div>
         </>
     )

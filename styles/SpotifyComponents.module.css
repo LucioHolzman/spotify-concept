@@ -54,8 +54,30 @@ height: 6px;
     width: auto;
 }
 
+
+.ulSpotifyPlayList {
+    height: 80px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.ulSpotifyPlayList::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, .1);
+    border-radius: 4px;
+}
+
+.ulSpotifyPlayList::-webkit-scrollbar-thumb {
+background: rgba(0, 0, 0, 0.3);
+border-radius: 4px;
+}
+
+.ulSpotifyPlayList::-webkit-scrollbar {
+width: 6px;  
+height: 6px;     
+}
+
+
 .contentSpotifyPlayListSelected {
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -66,4 +88,14 @@ height: 6px;
     height: 60px;
     width: auto;
     margin: 0;
+}
+
+.inputSpotifySearch {
+    margin-top: 15px;
+    background-color: transparent;
+    outline: none;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
 }

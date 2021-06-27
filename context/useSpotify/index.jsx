@@ -76,7 +76,7 @@ const useSpotify = () => {
     try {
       const tracksRes = await fetchSpotifyTracks(playList[playListToken].id , token);
       const tracksRe = tracksRes.data.tracks.items;
-      setTracks(tracksRe.slice(0,10));
+      setTracks(tracksRe.slice(0,12));
     } catch (error) {
       console.log(error);
     }

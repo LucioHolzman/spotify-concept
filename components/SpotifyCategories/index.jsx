@@ -29,7 +29,6 @@ export const SpotifyCategoriesList = () => {
 
 export const SpotifyCategorySelected = () => {
   const { categories, setCategoryToken, categoryToken } = useContext(contextApp);
-  console.log(categories);
   return (
     <>
       <ul>
