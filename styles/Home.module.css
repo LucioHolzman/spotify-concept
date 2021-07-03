@@ -12,10 +12,10 @@
   --height: var(--height-general);
   width: var(--width);
   height: var(--height);
-  transition: width 1s ease;
+  transition: width 1s ease, animation 5s linear;
   transform-style: preserve-3d;
   border-radius: 3px;
-  --time: calc(var(--total) * 4.5s);
+  --time: calc(var(--total) * 16.5s);
   --perspective: calc(var(--total) * 200px);
   animation: animate var(--time) linear infinite;
 }
@@ -39,11 +39,17 @@
 
 @keyframes animate {
   0% {
+    
     transform: rotateX(-10deg) perspective(var(--perspective)) rotateY(0deg);
   }
   100% {
     transform: rotateX(-10deg) perspective(var(--perspective)) rotateY(360deg);
   }
+}
+
+.main:hover {
+  animation-play-state: paused;
+  /* animation: animate calc(var(--time)*(var(--total))) linear infinite; */
 }
 
 .main span {
@@ -92,15 +98,6 @@
   object-fit: cover;
   transition: transform 0.5s ease-out;
   cursor: pointer;
-}
-
-.main:hover {
-  transition: animation 1s ease;
-  animation-play-state: paused;
-}
-.main:hover .categoryAndListSelected {
-  transition: animation 1s ease;
-  animation-play-state: paused;
 }
 
 .h1 {
@@ -159,3 +156,11 @@
   }
 }
 
+.infoSong {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}

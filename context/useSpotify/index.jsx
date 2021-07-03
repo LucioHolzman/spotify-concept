@@ -6,22 +6,36 @@ import {
   fetchSpotifyCategories,
   fetchSpotifyPlayList,
   fetchSpotifyTracks,
+  fetchCurrentlyPlaying,
 } from "../../services/spotify.service";
-import { useDebounce } from 'use-debounce';
+
+import { useDebounce } from "use-debounce";
+
 const useSpotify = () => {
   const [token, setToken] = useState("");
+
   const [userId, setUserId] = useState(process.env.NEXT_PUBLIC_SPOTIFY_USER_ID);
-  
+
   const [categories, setCategories] = useState([]);
+
   const [categoryToken, setCategoryToken] = useState(2);
-  
+
+  const [currentlyPlaying, setCurrentlyPlaying] = useState({
+    image: "",
+    nameAlbum: "",
+    nameSong: "",
+  });
+
+
   const [playList, setPlayList] = useState([]);
+
   const [playListToken, setPlayListToken] = useState(1);
-  
+
   const [tracks, setTracks] = useState([]);
 
-  const [search, setSearch] = useState('');
-  const [searchToken, setSearchToken] = useState('');
+  const [search, setSearch] = useState("");
+
+  const [searchToken, setSearchToken] = useState("");
 
   const [user, setUser] = useState({
     name: "",
@@ -55,7 +69,7 @@ const useSpotify = () => {
   const spotifyCategories = useCallback(async () => {
     try {
       const categoriesRes = await fetchSpotifyCategories(token);
-      const categoriesRe = (categoriesRes.data.categories.items);
+      const categoriesRe = categoriesRes.data.categories.items;
       setCategories(categoriesRe);
     } catch (error) {
       console.log(error);
@@ -64,8 +78,11 @@ const useSpotify = () => {
 
   const spotifyPlayList = useCallback(async () => {
     try {
-      const playlistRes = await fetchSpotifyPlayList(categories[categoryToken].id, token);
-      const playlistRe = playlistRes.data.playlists.items
+      const playlistRes = await fetchSpotifyPlayList(
+        categories[categoryToken].id,
+        token
+      );
+      const playlistRe = playlistRes.data.playlists.items;
       setPlayList(playlistRe);
     } catch (error) {
       console.log(error);
@@ -74,9 +91,12 @@ const useSpotify = () => {
 
   const spotifyTracks = useCallback(async () => {
     try {
-      const tracksRes = await fetchSpotifyTracks(playList[playListToken].id , token);
+      const tracksRes = await fetchSpotifyTracks(
+        playList[playListToken].id,
+        token
+      );
       const tracksRe = tracksRes.data.tracks.items;
-      setTracks(tracksRe.slice(0,12));
+      setTracks(tracksRe.slice(0, 10));
     } catch (error) {
       console.log(error);
     }
@@ -92,8 +112,22 @@ const useSpotify = () => {
     }
   }, [searchTokenDebounce, token, fetchSpotifySearch]);
 
+  const currentPlaying = useCallback(async () => {
+    try {
+      const currentlyPlayingRes = await fetchCurrentlyPlaying(token);
+      console.log(currentlyPlayingRes);
+      setCurrentlyPlaying({
+        image: currentlyPlayingRes.data.item.album.images[0].url,
+        nameAlbum: currentlyPlayingRes.data.item.album.name,
+        nameSong: currentlyPlayingRes.data.item.name,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [token, setCurrentlyPlaying, fetchCurrentlyPlaying]);
+
   useEffect(() => {
-      auth();
+    auth();
   }, []);
 
   useEffect(() => {
@@ -101,6 +135,12 @@ const useSpotify = () => {
       spotifyCategories();
     }
   }, [token]);
+
+  useEffect(() => {
+    if (token && currentlyPlaying.length ) {
+      currentPlaying();
+    }
+  }, [token, currentlyPlaying]);
 
   useEffect(() => {
     if (token && searchToken.length !== 0) {
@@ -120,6 +160,19 @@ const useSpotify = () => {
     }
   }, [searchToken, playList, playListToken]);
 
-  return {tracks, user, playList, categories, setCategoryToken, categoryToken, setPlayListToken, playListToken, setSearchToken, searchToken, search};
+  return {
+    tracks,
+    user,
+    playList,
+    currentlyPlaying,
+    categories,
+    setCategoryToken,
+    categoryToken,
+    setPlayListToken,
+    playListToken,
+    setSearchToken,
+    searchToken,
+    search,
+  };
 };
 export default useSpotify;

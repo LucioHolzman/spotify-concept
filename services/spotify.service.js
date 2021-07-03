@@ -90,3 +90,17 @@ export const fetchSpotifySearch = (search, token) => {
     console.log(error);
   }
 };
+
+export const fetchCurrentlyPlaying = (token) => {
+  try {
+    return axios(
+      `https://api.spotify.com/v1/me/player/currently-playing?market=ES`,
+      {
+        method: "GET",
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

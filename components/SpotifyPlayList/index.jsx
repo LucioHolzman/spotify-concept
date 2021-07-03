@@ -30,7 +30,6 @@ export const SpotifyPlayListSelected = () => {
   const { playList, playListToken } = useContext(contextApp);
   return (
     <>
-    
             <li className={styles.liSpotifyPlayList} key={playList[playListToken].id}>
               <a  href="#" className={styles.contentSpotifyPlayListSelected} >
                   <h4>Playlist</h4>

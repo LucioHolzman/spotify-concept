@@ -3,7 +3,7 @@ const About = () => {
     return (
         <>
             <h1>
-                About
+                ABOUT
             </h1>
            <Navigation/>
         </>
