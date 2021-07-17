@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback, useMemo, useContext } from "react";
 import { contextApp } from "../context";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import stylesSpotify from "../styles/SpotifyComponents.module.css";
 import {
   SpotifyCategoriesList,
   SpotifyCategorySelected,
@@ -14,67 +13,8 @@ import {
 import SpotifyTrack from "../components/SpotifyTrack";
 import SpotifySearch from "../components/SpotifySearch";
 import Spinner from "../components/Spinner";
-import { storage } from "../firebase";
 
 export default function Home() {
-  const [images, setImages] = useState([]);
-
-  const [imageUp, setImageUp] = useState(null);
-
-  const [progress, setProgress] = useState(0);
-
-  const handleChangeImage = (e) => {
-    if (e.target.files[0]) {
-      setImageUp(e.target.files[0]);
-    }
-  };
-
-  const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${imageUp.name}`).put(imageUp);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progress);
-        progress === 100 &&
-          setInterval(() => {
-            setProgress(0);
-          }, 2500);
-      },
-      (error) => {
-        console.log(error);
-      },
-      async () => {
-        const url = await storage
-          .ref("images")
-          .child(imageUp.name)
-          .getDownloadURL();
-        setImages([...images, url]);
-      }
-    );
-  };
-
-  const fetchAllImages = useCallback(async () => {
-    try {
-      const listRef = storage.ref("images");
-      const { items } = await listRef.listAll();
-      const arrayImages = [];
-      for (let item = 0; item < items.length; item++) {
-        const element = items[item];
-        const url = await element.getDownloadURL();
-        arrayImages.push(url);
-      }
-      setImages(arrayImages);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchAllImages();
-  }, []);
 
   const { tracks } = useContext(contextApp);
   //------------Total---------------
@@ -86,13 +26,11 @@ export default function Home() {
   //------------Height--------------
   const [height, setHeight] = useState(250);
 
-
-
   const { currentlyPlaying } = useContext(contextApp);
   const background = {
-    "background-image": `url(${currentlyPlaying.image?currentlyPlaying.image:''})`,
-    "background-position": `center`,
-    "background-repeat": `no-repeat`
+    "backgroundImage": `url(${currentlyPlaying.image?currentlyPlaying.image:''})`,
+    "backgroundPosition": `center`,
+    "backgroundRepeat": `no-repeat`
   }
   return (
     <div>
